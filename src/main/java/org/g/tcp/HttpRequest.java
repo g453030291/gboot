@@ -1,5 +1,6 @@
 package org.g.tcp;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -31,10 +32,14 @@ public class HttpRequest {
 	/**
 	 * http header
 	 */
-	private class Header{
-		private String method;
+	public static final class Header{
+		private HttpMethod method;
 
 		private String host;
+
+		private String uri;
+
+		private HashMap<String,String> uri_param;
 
 		private String connection;
 
@@ -44,11 +49,11 @@ public class HttpRequest {
 
 		private String userAgent;
 
-		public String getMethod() {
+		public HttpMethod getMethod() {
 			return method;
 		}
 
-		public void setMethod(String method) {
+		public void setMethod(HttpMethod method) {
 			this.method = method;
 		}
 
@@ -58,6 +63,22 @@ public class HttpRequest {
 
 		public void setHost(String host) {
 			this.host = host;
+		}
+
+		public String getUri() {
+			return uri;
+		}
+
+		public void setUri(String uri) {
+			this.uri = uri;
+		}
+
+		public HashMap<String, String> getUri_param() {
+			return uri_param;
+		}
+
+		public void setUri_param(HashMap<String, String> uri_param) {
+			this.uri_param = uri_param;
 		}
 
 		public String getConnection() {
@@ -96,7 +117,7 @@ public class HttpRequest {
 	/**
 	 * http body
 	 */
-	private class Body{
+	public class Body{
 		private Map<String,Object> map;
 
 		public Map<String, Object> getMap() {

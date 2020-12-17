@@ -1,7 +1,9 @@
 package org.g.tcp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,18 +24,30 @@ public class HttpHandle implements Runnable {
 	public void run() {
 		byte[] bytes = new byte[1024];
 		StringBuilder sb = new StringBuilder();
+		HttpRequest httpRequest = new HttpRequest();
+		HttpRequest.Header header = new HttpRequest.Header();
+		HashMap<String,String> map = new HashMap<String,String>();
 		InputStream inputStream = null;
 		try {
 			inputStream = socket.getInputStream();
-			int len = 0;
-			while ((len = inputStream.read(bytes)) != -1){
-				sb.append(new String(bytes,0,len,"UTF-8"));
-				System.out.println(sb.toString());
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+			String str = null;
+			while ((str = br.readLine())!=null){
+				if(str.startsWith(HttpMethod.GET.toString())){
+					header.setMethod(HttpMethod.GET);
+					String param = str.split(" ")[1];
+					header.setUri(param);
+					String param2 = param.substring(2,param.length());
+					String [] param3 = param2.split("&");
+					for (int j = 0; j < param3.length; j++) {
+						String[] param4 = param3[j].split("=");
+						map.put(param4[0],param4[1]);
+					}
+					header.setUri_param(map);
+				}
+
 			}
-			String[] split = sb.toString().split("\r\n");
-			if(split[0].startsWith(HttpMethod.GET.toString())){
-				doGet(split);
-			}
+
 			inputStream.close();
 			socket.close();
 		} catch (IOException e) {
