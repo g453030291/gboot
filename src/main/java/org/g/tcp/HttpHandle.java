@@ -1,14 +1,13 @@
 package org.g.tcp;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
+ * 获取到请求类型,get post put delete option
+ * 封装http请求头 请求体 参数
  * @author g
  * @date 2020/12/13 5:33 下午
  */
@@ -28,26 +27,14 @@ public class HttpHandle implements Runnable {
 		HttpRequest.Header header = new HttpRequest.Header();
 		HashMap<String,String> map = new HashMap<String,String>();
 		InputStream inputStream = null;
+		int data;
 		try {
 			inputStream = socket.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-			String str = null;
-			while ((str = br.readLine())!=null){
-				if(str.startsWith(HttpMethod.GET.toString())){
-					header.setMethod(HttpMethod.GET);
-					String param = str.split(" ")[1];
-					header.setUri(param);
-					String param2 = param.substring(2,param.length());
-					String [] param3 = param2.split("&");
-					for (int j = 0; j < param3.length; j++) {
-						String[] param4 = param3[j].split("=");
-						map.put(param4[0],param4[1]);
-					}
-					header.setUri_param(map);
-				}
-
+			while ((data = inputStream.read(bytes)) != -1){
+				sb.append(new String(bytes,0,data,"UTF-8"));
 			}
-
+			System.out.println(sb.toString());
+			doGet(sb.toString());
 			inputStream.close();
 			socket.close();
 		} catch (IOException e) {
@@ -55,11 +42,19 @@ public class HttpHandle implements Runnable {
 		}
 	}
 
-	/**
-	 * 执行get请求
-	 * @param split
-	 */
-	private Map<String,String> doGet(String[] split){
+	private void doGet(String str){
+		HttpProcessDataStrategy processDataStrategy = null;
+		if(str.startsWith("GET")){
+			processDataStrategy = ProcessDataFactory.getProcessDataStrategy(HttpMethod.GET);
+		}else if(str.startsWith("POST")){
+			processDataStrategy = ProcessDataFactory.getProcessDataStrategy(HttpMethod.POST);
+		}else{
+
+		}
+		processDataStrategy.processData(str);
+	}
+
+//	private Map<String,String> doGet(String[] split){
 //		GET /?aa=99 HTTP/1.1
 //		Host: localhost:8888
 //		Connection: keep-alive
@@ -75,17 +70,17 @@ public class HttpHandle implements Runnable {
 //Accept-Encoding: gzip, deflate, br
 //Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
 //Cookie: Webstorm-47bc3066=5b3d46d2-5415-40ef-9c18-410f6d0fd04c
-		Map<String,String> map = new HashMap<String,String>();
-		for (int i = 0; i < split.length; i++) {
-			String param = split[0].split(" ")[1];
-			String param2 = param.substring(2,param.length());
-			String [] param3 = param2.split("&");
-			for (int j = 0; j < param3.length; j++) {
-				String[] param4 = param3[j].split("=");
-				map.put(param4[0],param4[1]);
-			}
-		}
-		return  map;
-	}
+//		Map<String,String> map = new HashMap<String,String>();
+//		for (int i = 0; i < split.length; i++) {
+//			String param = split[0].split(" ")[1];
+//			String param2 = param.substring(2,param.length());
+//			String [] param3 = param2.split("&");
+//			for (int j = 0; j < param3.length; j++) {
+//				String[] param4 = param3[j].split("=");
+//				map.put(param4[0],param4[1]);
+//			}
+//		}
+//		return  map;
+//	}
 
 }
