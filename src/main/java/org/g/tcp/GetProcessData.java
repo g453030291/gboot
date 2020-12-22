@@ -1,7 +1,8 @@
 package org.g.tcp;
 
+import org.g.http.HttpData;
+
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author g
@@ -9,14 +10,16 @@ import java.util.Map;
  */
 public class GetProcessData implements HttpProcessDataStrategy {
 	@Override
-	public HttpRequest processData(String str) {
-		Map<String,String> map = new HashMap<>();
+	public HttpData processData(String str) {
+		HttpData data = new HttpData();
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		System.out.println("http get收到请求,处理数据中...");
 		String[] split = str.split("\r\n");
 		for (int i=0;i < split.length;i++){
 			//处理get请求中uri的数据
 			if(i==0){
-				String s = split[0].split(" ")[1];
+				String[] str_array = split[0].split(" ");
+				String s = str_array[1];
 				String s1 = s.substring(2,s.length());
 				String[] split1 = s1.split("&");
 				for (int j=0;j<split1.length;j++){
@@ -24,12 +27,17 @@ public class GetProcessData implements HttpProcessDataStrategy {
 					map.put(split1[i].substring(0,k),
 							split1[i].substring(k+1,split1[i].length()));
 				}
+				data.setMethod(str_array[0]);
+				data.setVersion(str_array[2]);
+			}
+			if(data.getHost()==null){
+				if(split[i].startsWith("HOST")){
+					split[i].
+					data.setHost(null);
+				}
 			}
 		}
-		System.out.println("数据为");
-		for (Map.Entry entry:map.entrySet()){
-			System.out.println(entry.getKey()+"---"+entry.getValue());
-		}
+		data.setParam(map);
 		return null;
 	}
 }

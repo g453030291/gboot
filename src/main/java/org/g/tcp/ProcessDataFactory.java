@@ -1,5 +1,7 @@
 package org.g.tcp;
 
+import org.g.http.HttpMethod;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import java.util.Map;
  */
 public class ProcessDataFactory {
 
-	private static Map<HttpMethod,HttpProcessDataStrategy> httpMethodHttpProcessDataStrategyMap = new HashMap<>();
+	private static Map<String,HttpProcessDataStrategy> httpMethodHttpProcessDataStrategyMap = new HashMap<>();
 
 	static {
 		httpMethodHttpProcessDataStrategyMap.put(HttpMethod.GET,new GetProcessData());
@@ -18,7 +20,6 @@ public class ProcessDataFactory {
 	}
 
 	public static HttpProcessDataStrategy getProcessDataStrategy(HttpMethod method){
-		System.out.println(httpMethodHttpProcessDataStrategyMap.size()+"----------");
 		return httpMethodHttpProcessDataStrategyMap.get(method);
 	}
 

@@ -1,5 +1,7 @@
 package org.g.tcp;
 
+import org.g.http.HttpData;
+
 /**
  * 各类型请求解析数据接口
  * @author g
@@ -7,6 +9,6 @@ package org.g.tcp;
  */
 public interface HttpProcessDataStrategy {
 
-	HttpRequest processData(String str);
+	HttpData processData(String str);
 
 }

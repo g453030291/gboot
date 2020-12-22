@@ -1,5 +1,7 @@
 package org.g.tcp;
 
+import org.g.http.HttpMethod;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
