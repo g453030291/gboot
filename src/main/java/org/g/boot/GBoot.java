@@ -1,12 +1,12 @@
 package org.g.boot;
 
-import org.g.tcp.HttpHandle;
+import org.g.core.JsonResource;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.URL;
 
 /**
+ * 基于servlet的容器(类tomcat)
  * @author g
  * @date 2020/12/13
  */
@@ -19,11 +19,13 @@ public class GBoot {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		ServerSocket serverSocket = new ServerSocket(8888,2);
-		while (true){
-			Socket socket = serverSocket.accept();
-			new Thread(new HttpHandle(socket)).start();
-		}
+//		GServlet gServlet = new GServlet();
+//
+//		ServerSocket serverSocket = new ServerSocket(8888,2);
+		JsonResource jsonResource = new JsonResource();
+		jsonResource.getFile();
+		URL url = Thread.currentThread().getContextClassLoader().getResource("application.json");
+		System.out.println(url);
 	}
 
 }
