@@ -1,9 +1,9 @@
 package org.g.boot;
 
-import org.g.core.JsonResource;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * 基于servlet的容器(类tomcat)
@@ -22,10 +22,14 @@ public class GBoot {
 //		GServlet gServlet = new GServlet();
 //
 //		ServerSocket serverSocket = new ServerSocket(8888,2);
-		JsonResource jsonResource = new JsonResource();
-		jsonResource.getFile();
-		URL url = Thread.currentThread().getContextClassLoader().getResource("application.json");
-		System.out.println(url);
+//		JsonResource jsonResource = new JsonResource();
+//		jsonResource.getFile();
+//		URL url = Thread.currentThread().getContextClassLoader().getResource("application.json");
+//		System.out.println(url);
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+		Object book = context.getBean("book");
+		System.out.println(book.toString());
 	}
 
 }
