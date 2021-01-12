@@ -1,6 +1,6 @@
-package org.g.core;
+package org.g.resource;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 
 /**
@@ -12,11 +12,16 @@ public class JsonResource implements Resource {
 	private static final String FILE_NAME = "application.json";
 
 	@Override
-	public File getFile() {
+	public File getFile() throws IOException {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(FILE_NAME);
 		File file = new File(url.getPath());
+		FileReader fileReader = new FileReader(file);
 
-		return null;
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		String line = bufferedReader.readLine();
+		char[] chars = new char[];
+		bufferedReader.read
+		return file;
 	}
 
 	@Override

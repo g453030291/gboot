@@ -12,6 +12,8 @@ public class Book {
 
 	private long price;
 
+	private Dog dog;
+
 	public int getId() {
 		return id;
 	}
@@ -36,12 +38,21 @@ public class Book {
 		this.price = price;
 	}
 
+	public Dog getDog() {
+		return dog;
+	}
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
 	@Override
 	public String toString() {
 		return "Book{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", price=" + price +
+				", dog=" + dog +
 				'}';
 	}
 }

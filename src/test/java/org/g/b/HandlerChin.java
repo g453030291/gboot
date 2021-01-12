@@ -1,4 +1,4 @@
-package org.g;
+package org.g.b;
 
 /**
  * @author g

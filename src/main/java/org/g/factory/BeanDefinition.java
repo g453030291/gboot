@@ -1,10 +1,5 @@
 package org.g.factory;
 
-import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.lang.Nullable;
-
 /**
  * 转义资源文件中的bean
  * @author g
@@ -17,53 +12,24 @@ public interface BeanDefinition {
 	 * <p>Note that extended bean factories might support further scopes.
 	 * @see #setScope
 	 */
-	String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
+	String SCOPE_SINGLETON = "singleton";
 
 	/**
 	 * Scope identifier for the standard prototype scope: "prototype".
 	 * <p>Note that extended bean factories might support further scopes.
 	 * @see #setScope
 	 */
-	String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
+	String SCOPE_PROTOTYPE = "prototype";
 
-
-	/**
-	 * Role hint indicating that a {@code BeanDefinition} is a major part
-	 * of the application. Typically corresponds to a user-defined bean.
-	 */
-	int ROLE_APPLICATION = 0;
-
-	/**
-	 * Role hint indicating that a {@code BeanDefinition} is a supporting
-	 * part of some larger configuration, typically an outer
-	 * {@link org.springframework.beans.factory.parsing.ComponentDefinition}.
-	 * {@code SUPPORT} beans are considered important enough to be aware
-	 * of when looking more closely at a particular
-	 * {@link org.springframework.beans.factory.parsing.ComponentDefinition},
-	 * but not when looking at the overall configuration of an application.
-	 */
-	int ROLE_SUPPORT = 1;
-
-	/**
-	 * Role hint indicating that a {@code BeanDefinition} is providing an
-	 * entirely background role and has no relevance to the end-user. This hint is
-	 * used when registering beans that are completely part of the internal workings
-	 * of a {@link org.springframework.beans.factory.parsing.ComponentDefinition}.
-	 */
-	int ROLE_INFRASTRUCTURE = 2;
-
-
-	// Modifiable attributes
 
 	/**
 	 * Set the name of the parent definition of this bean definition, if any.
 	 */
-	void setParentName(@Nullable String parentName);
+	void setParentName( String parentName);
 
 	/**
 	 * Return the name of the parent definition of this bean definition, if any.
 	 */
-	@Nullable
 	String getParentName();
 
 	/**
@@ -74,7 +40,7 @@ public interface BeanDefinition {
 	 * @see #setFactoryBeanName
 	 * @see #setFactoryMethodName
 	 */
-	void setBeanClassName(@Nullable String beanClassName);
+	void setBeanClassName(String beanClassName);
 
 	/**
 	 * Return the current bean class name of this bean definition.
@@ -88,7 +54,6 @@ public interface BeanDefinition {
 	 * @see #getFactoryBeanName()
 	 * @see #getFactoryMethodName()
 	 */
-	@Nullable
 	String getBeanClassName();
 
 	/**
@@ -96,13 +61,12 @@ public interface BeanDefinition {
 	 * @see #SCOPE_SINGLETON
 	 * @see #SCOPE_PROTOTYPE
 	 */
-	void setScope(@Nullable String scope);
+	void setScope( String scope);
 
 	/**
 	 * Return the name of the current target scope for this bean,
 	 * or {@code null} if not known yet.
 	 */
-	@Nullable
 	String getScope();
 
 	/**
@@ -122,12 +86,11 @@ public interface BeanDefinition {
 	 * Set the names of the beans that this bean depends on being initialized.
 	 * The bean factory will guarantee that these beans get initialized first.
 	 */
-	void setDependsOn(@Nullable String... dependsOn);
+	void setDependsOn( String... dependsOn);
 
 	/**
 	 * Return the bean names that this bean depends on.
 	 */
-	@Nullable
 	String[] getDependsOn();
 
 	/**
@@ -161,12 +124,12 @@ public interface BeanDefinition {
 	 * This the name of the bean to call the specified factory method on.
 	 * @see #setFactoryMethodName
 	 */
-	void setFactoryBeanName(@Nullable String factoryBeanName);
+	void setFactoryBeanName( String factoryBeanName);
 
 	/**
 	 * Return the factory bean name, if any.
 	 */
-	@Nullable
+	
 	String getFactoryBeanName();
 
 	/**
@@ -177,12 +140,12 @@ public interface BeanDefinition {
 	 * @see #setFactoryBeanName
 	 * @see #setBeanClassName
 	 */
-	void setFactoryMethodName(@Nullable String factoryMethodName);
+	void setFactoryMethodName( String factoryMethodName);
 
 	/**
 	 * Return a factory method, if any.
 	 */
-	@Nullable
+	
 	String getFactoryMethodName();
 
 	/**
@@ -190,14 +153,14 @@ public interface BeanDefinition {
 	 * <p>The returned instance can be modified during bean factory post-processing.
 	 * @return the ConstructorArgumentValues object (never {@code null})
 	 */
-	ConstructorArgumentValues getConstructorArgumentValues();
+//	ConstructorArgumentValues getConstructorArgumentValues();
 
 	/**
 	 * Return the property values to be applied to a new instance of the bean.
 	 * <p>The returned instance can be modified during bean factory post-processing.
 	 * @return the MutablePropertyValues object (never {@code null})
 	 */
-	MutablePropertyValues getPropertyValues();
+//	MutablePropertyValues getPropertyValues();
 
 	/**
 	 * Return whether this a <b>Singleton</b>, with a single, shared instance

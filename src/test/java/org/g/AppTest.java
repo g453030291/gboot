@@ -1,7 +1,6 @@
 package org.g;
 
-import static org.junit.Assert.assertTrue;
-
+import org.g.resource.JsonResource;
 import org.junit.Test;
 
 /**
@@ -13,8 +12,9 @@ public class AppTest
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void testJsonResource() {
+        JsonResource resource = new JsonResource();
+        resource.getFile();
+        System.out.println(resource.getFile());
     }
 }

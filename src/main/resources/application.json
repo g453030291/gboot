@@ -1,3 +1,15 @@
 {
-  "aa": "bb"
+  "beans": [
+    {
+      "bean": {
+        "id": "book",
+        "class": "org.g.entity.Book",
+        "property": [
+          {"name": "id","value": "1"},
+          {"name": "name","value": "这是我的书名"},
+          {"name": "price","value": "1.0"}
+        ]
+      }
+    }
+  ]
 }

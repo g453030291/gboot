@@ -1,6 +1,8 @@
-package org.g.core;
+package org.g.resource;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * 通过各种形式加载外部资源文件
@@ -14,8 +16,9 @@ public interface Resource {
 	/**
 	 * get file
 	 * @return file object
+	 * @exception FileNotFoundException file not found
 	 */
-	File getFile();
+	File getFile() throws IOException;
 
 	/**
 	 * get file name

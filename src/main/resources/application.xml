@@ -4,10 +4,44 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id="book" class="org.g.entity.Book">
-    <property name="id" value="1"/>
-    <property name="name" value="解忧杂货铺"/>
-    <property name="price" value="0"/>
-</bean>
+    <bean id="book" class="org.g.entity.Book">
+        <property name="id" value="1"/>
+        <property name="name" value="解忧杂货铺"/>
+        <property name="price" value="0"/>
+    </bean>
+
+    <bean id="book2" class="org.g.entity.Book">
+        <property name="id" value="1"/>
+        <property name="name" value="战争与和平"/>
+        <property name="price" value="0"/>
+    </bean>
+
+    <bean id="book3" class="org.g.entity.Book">
+        <property name="id" value="1"/>
+        <property name="name" value="亲爱的你别走"/>
+        <property name="price" value="0"/>
+    </bean>
+
+    <bean id="extend" class="org.g.spring.ExtendFactory">
+
+    </bean>
+
+    <bean id="book4" class="org.g.entity.Book">
+        <property name="id" value="1"/>
+        <property name="name" value="亲爱的你别走"/>
+        <property name="price" value="0"/>
+        <property name="dog" ref="dog"/>
+    </bean>
+
+    <bean id="car" class="org.g.entity.Car">
+        <property name="id" value="2"/>
+        <property name="book" ref="book4"/>
+    </bean>
+
+    <bean id="dog" class="org.g.entity.Dog">
+        <property name="id" value="3"/>
+        <property name="name" value="wangwang"/>
+        <property name="car" ref="car"/>
+    </bean>
 
 </beans>
