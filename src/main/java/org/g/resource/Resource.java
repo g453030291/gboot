@@ -2,7 +2,6 @@ package org.g.resource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * 通过各种形式加载外部资源文件
@@ -18,7 +17,7 @@ public interface Resource {
 	 * @return file object
 	 * @exception FileNotFoundException file not found
 	 */
-	File getFile() throws IOException;
+	File getFile();
 
 	/**
 	 * get file name
