@@ -1,0 +1,11 @@
+beans:
+  - id: book
+    path: org.g.entity.Book
+    property:
+      - name: aaa
+        value: bbb
+  - id: book
+    path: org.g.entity.Book
+    property:
+      - name: aaa
+        value: bbb

@@ -1,10 +1,11 @@
 package org.g.resource;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
@@ -12,6 +13,8 @@ import java.net.URL;
  * @date 2021/1/3 3:33 下午
  */
 public class JsonResource implements Resource {
+
+	private static Gson GSON = new GsonBuilder().serializeNulls().create();
 
 	private static final String FILE_NAME = "application.json";
 
@@ -27,19 +30,14 @@ public class JsonResource implements Resource {
 		return null;
 	}
 
-	public JsonDocument getBeanDefinitionFromJsonResource() throws IOException {
-		File file = getFile();
-		byte[] bytes = new byte[1024];
-		FileInputStream fileInputStream = new FileInputStream(file);
-		int length = 0;
-		StringBuilder sb = new StringBuilder();
-		while ((length = fileInputStream.read(bytes)) != -1){
-			sb.append(new String(bytes,0,length,"UTF-8"));
-		}
-		String json = sb.toString();
-		System.out.println(json);
-		Gson gson = new Gson();
-		JsonDocument jsonDocument = gson.fromJson(json, JsonDocument.class);
+	@Override
+	public InputStream getFileAsInputStream() {
+		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+		return resourceAsStream;
+	}
+
+	public JsonDocument getBeanDefinitionFromJsonResource() {
+		JsonDocument jsonDocument = GSON.fromJson(new InputStreamReader(getFileAsInputStream()), JsonDocument.class);
 		return jsonDocument;
 	}
 }

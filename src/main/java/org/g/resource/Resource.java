@@ -2,6 +2,7 @@ package org.g.resource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * 通过各种形式加载外部资源文件
@@ -24,5 +25,11 @@ public interface Resource {
 	 * @return file name
 	 */
 	String getFileName();
+
+	/**
+	 * get file as inputStream
+	 * @return
+	 */
+	InputStream getFileAsInputStream();
 
 }

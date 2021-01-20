@@ -1,36 +1,33 @@
 package org.g.factory;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.core.ResolvableType;
-
 /**
  * @author g
  * @date 2021/1/12 10:08 下午
  */
 public class DefaultBeanFactory implements BeanFactory {
+
 	@Override
-	public Object getBean(String name) throws BeansException {
+	public Object getBean(String name) {
 		return null;
 	}
 
 	@Override
-	public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
+	public <T> T getBean(String name, Class<T> requiredType) {
 		return null;
 	}
 
 	@Override
-	public Object getBean(String name, Object... args) throws BeansException {
+	public Object getBean(String name, Object... args) {
 		return null;
 	}
 
 	@Override
-	public <T> T getBean(Class<T> requiredType) throws BeansException {
+	public <T> T getBean(Class<T> requiredType) {
 		return null;
 	}
 
 	@Override
-	public <T> T getBean(Class<T> requiredType, Object... args) throws BeansException {
+	public <T> T getBean(Class<T> requiredType, Object... args) {
 		return null;
 	}
 
@@ -40,27 +37,22 @@ public class DefaultBeanFactory implements BeanFactory {
 	}
 
 	@Override
-	public boolean isSingleton(String name) throws NoSuchBeanDefinitionException {
+	public boolean isSingleton(String name) {
 		return false;
 	}
 
 	@Override
-	public boolean isPrototype(String name) throws NoSuchBeanDefinitionException {
+	public boolean isPrototype(String name) {
 		return false;
 	}
 
 	@Override
-	public boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException {
+	public boolean isTypeMatch(String name, Class<?> typeToMatch) {
 		return false;
 	}
 
 	@Override
-	public boolean isTypeMatch(String name, Class<?> typeToMatch) throws NoSuchBeanDefinitionException {
-		return false;
-	}
-
-	@Override
-	public Class<?> getType(String name) throws NoSuchBeanDefinitionException {
+	public Class<?> getType(String name) {
 		return null;
 	}
 
